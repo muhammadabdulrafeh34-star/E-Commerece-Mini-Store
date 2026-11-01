@@ -5,6 +5,6 @@ export default async function getProduct() {
         return data;
     } catch {
         console.log("getProduct API is not working");
-    } 
+    }
 }
 

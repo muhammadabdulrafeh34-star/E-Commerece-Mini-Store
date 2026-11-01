@@ -2,11 +2,12 @@ import './App.css'
 import AllProducts from './components/AllProducts'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProductDetailPage from "./components/ProductDetailPage"
+import RootLayout from './components/Navbar/RootLayout'
 
 const router = createBrowserRouter([
   {
     path:"/",
-  // element:<RootLayout/>,
+  element:<RootLayout/>,
   children:[
     {
     path: "/",

@@ -5,6 +5,7 @@
   //api fetch use kren ge aur behtar ye hai k useEffect use kiya jy so import useEffet
   import { useState, useEffect } from 'react'
   import { Link } from 'react-router-dom'
+  import Input from './Input'
 
   function AllProducts() {
     // hum data ko state me rakhen so create the state
@@ -33,7 +34,10 @@
         return (<p>{error}</p>)
       }
     return (
+
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto">
+        <input getProduct={getProduct} />
+        
     {product.products?.map((item) => (
       <div 
         key={item.id} 
