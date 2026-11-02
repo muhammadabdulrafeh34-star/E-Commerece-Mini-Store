@@ -8,10 +8,26 @@
   import Input from './Input'
 
   function AllProducts() {
-    // hum data ko state me rakhen so create the state
+   
+   // hum data ko state me rakhen so create the state
     const [product, setProduct] = useState([])
     const [error, setError] = useState("")
     const[loading, setLoading] = useState(true)
+      const [inputValue, setInputValue] = useState('')
+
+
+      const filterProducts = () => {
+        console.log(product?.products)
+       const results = (getProduct?.products || []).filter((item) =>
+    (item.title || '').toLowerCase().includes(inputValue.toLowerCase())
+);
+        return results;
+    }
+
+    console.log("product:", product)
+    console.log("filterProducts:", filterProducts())
+    console.log("inputValue:", inputValue)
+
     useEffect(() => {
         // hum api use krny lagy hain so no risk use try catch
           // for waiting the response for API so async await use and create the function with then name of fetch
@@ -27,18 +43,24 @@
       }
       fetch()
       }, [])
+
+
       if (loading) {
         return (<p>Loading...</p>)
       }
       if (error) {
+        
         return (<p>{error}</p>)
       }
     return (
+      <>
+       <Input 
+       inputValue={inputValue}
+        setInputValue={setInputValue}
+       />
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto">
-        <input getProduct={getProduct} />
-        
-    {product.products?.map((item) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto">        
+    {filterProducts().map((item) => (
       <div 
         key={item.id} 
         className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col"
@@ -67,6 +89,7 @@
       </div>
     ))}
   </div>
+      </>
     )
   }
   export default AllProducts
