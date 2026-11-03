@@ -6,6 +6,7 @@
   import { useState, useEffect } from 'react'
   import { Link } from 'react-router-dom'
   import Input from './Input'
+  import Sort from './Sort'
 
   function AllProducts() {
    
@@ -13,20 +14,36 @@
     const [product, setProduct] = useState([])
     const [error, setError] = useState("")
     const[loading, setLoading] = useState(true)
-      const [inputValue, setInputValue] = useState('')
+    const [inputValue, setInputValue] = useState('')
+    const [sortOption, setSortOption] = useState(null);
 
 
       const filterProducts = () => {
-        console.log(product?.products)
-       const results = (getProduct?.products || []).filter((item) =>
+       const results = (product?.products || []).filter((item) =>
     (item.title || '').toLowerCase().includes(inputValue.toLowerCase())
 );
         return results;
+
     }
 
-    console.log("product:", product)
-    console.log("filterProducts:", filterProducts())
-    console.log("inputValue:", inputValue)
+     const sortProducts = (products, option) => {
+            if (!option) return products;
+          const sorted = [...products].sort((a, b) => {
+                if (option.value === 'price-asc') {
+                    return a.price - b.price;
+                }
+                if (option.value === 'price-desc') {
+                    return b.price - a.price;
+                }
+                if (option.value === 'rating') {
+                    return b.rating - a.rating;
+                }
+                return 0;
+            });
+              return sorted;
+        };
+
+
 
     useEffect(() => {
         // hum api use krny lagy hain so no risk use try catch
@@ -58,11 +75,18 @@
        inputValue={inputValue}
         setInputValue={setInputValue}
        />
+       <Sort 
+        sortOption={sortOption}
+        setSortOption={setSortOption}
+       />
 
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 max-w-7xl mx-auto">        
-    {filterProducts().map((item) => (
-      <div 
-        key={item.id} 
+    {sortProducts(filterProducts(), sortOption).length === 0 ? (
+      <p>Prdoucts Not found</p>
+    ) : (
+      sortProducts(filterProducts(), sortOption).map((item) => (
+        <div 
+          key={item.id} 
         className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col"
       >
         {/* Product Image */}
@@ -87,7 +111,8 @@
         </div>
         </Link>
       </div>
-    ))}
+    ))
+  )}
   </div>
       </>
     )
