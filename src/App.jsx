@@ -2,7 +2,9 @@ import './App.css'
 import AllProducts from './components/AllProducts'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ProductDetailPage from "./components/ProductDetailPage"
-import RootLayout from './components/Navbar/RootLayout'
+import RootLayout from './components/Navbar/RootLayout' 
+import CartPage from './Pages/CartPage'
+import WishList from './Pages/WishList'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +18,15 @@ const router = createBrowserRouter([
     {
       path: "ProductDetailPage/:id",
       element: <ProductDetailPage/>
-    }
+    },
+    {
+      path: "Cart",
+      element:<CartPage/>
+    },
+    {
+    path: "WishList",
+    element:<WishList/>
+    },
   ]
   }
 ])
