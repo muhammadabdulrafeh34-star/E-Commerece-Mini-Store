@@ -68,15 +68,7 @@ function AllProducts() {
   const finalProducts = sortProducts(filterProducts(), sortOption);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-        <div className="w-full md:w-1/2">
-          <Input inputValue={inputValue} setInputValue={setInputValue} />
-        </div>
-        <div className="w-full md:w-auto">
-          <Sort sortOption={sortOption} setSortOption={setSortOption} />
-        </div>
-      </div> */}
+    <div className="max-w-7xl mx-auto px-4 py-8"> 
         <div>
         </div>
       {/* Products Grid */}
